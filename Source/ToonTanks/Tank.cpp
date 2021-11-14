@@ -22,6 +22,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Rotate);
+	PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this,  &ATank::Fire);
 }
 
 void ATank::Tick(float DeltaTime)
