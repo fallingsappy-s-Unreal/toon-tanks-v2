@@ -16,6 +16,13 @@ void ATurret::Tick(float DeltaSeconds)
 	}
 }
 
+void ATurret::HandleDestruction()
+{
+	Super::HandleDestruction();
+
+	Destroy();
+}
+
 void ATurret::BeginPlay()
 {
 	Super::BeginPlay();

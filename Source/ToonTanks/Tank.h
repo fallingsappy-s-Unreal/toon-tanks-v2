@@ -23,10 +23,14 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void HandleDestruction() override;
+
+	APlayerController* GetTankPlayerController() const;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
+
 private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
@@ -44,5 +48,5 @@ private:
 	void Move(float Value);
 	void Rotate(float Value);
 
-	APlayerController* PlayerControllerRef;
+	APlayerController* TankPlayerController;
 };
