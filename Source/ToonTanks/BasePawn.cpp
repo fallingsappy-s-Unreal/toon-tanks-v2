@@ -5,6 +5,7 @@
 
 #include "Projectile.h"
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -27,7 +28,20 @@ ABasePawn::ABasePawn()
 
 void ABasePawn::HandleDestruction()
 {
-	
+	if (DeathParticles)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticles, GetActorLocation(), GetActorRotation());
+	}
+
+	if (DeathSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation(), GetActorRotation());
+	}
+
+	if (DeathCameraShakeClass)
+	{
+		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
+	}
 }
 
 void ABasePawn::RotateTurret(FVector LookAtTarget)
@@ -39,7 +53,8 @@ void ABasePawn::RotateTurret(FVector LookAtTarget)
 
 void ABasePawn::Fire()
 {
-	const auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, ProjectileSpawnPoint->GetComponentLocation(),
+	const auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
+	                                                            ProjectileSpawnPoint->GetComponentLocation(),
 	                                                            ProjectileSpawnPoint->GetComponentRotation());
 
 	Projectile->SetOwner(this);

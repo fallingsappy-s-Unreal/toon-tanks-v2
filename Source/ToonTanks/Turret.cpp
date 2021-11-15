@@ -34,6 +34,11 @@ void ATurret::BeginPlay()
 
 void ATurret::CheckFireCondition()
 {
+	if (PlayerTank == nullptr || !PlayerTank->bAlive)
+	{
+		return;
+	}
+	
 	if (InFireRange())
 	{
 		Fire();

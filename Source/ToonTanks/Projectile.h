@@ -34,4 +34,19 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float DamageAmount = 50.f;
+
+	UPROPERTY(EditAnywhere, Category = "Effects")
+	class UParticleSystem* HitParticles;
+
+	UPROPERTY(EditAnywhere, Category = "Effects")
+	class UParticleSystemComponent* SmokeTrailComponent;
+
+	UPROPERTY(EditAnywhere, Category = "Sound Effects")
+	class USoundBase* LaunchSound;
+	
+	UPROPERTY(EditAnywhere, Category = "Sound Effects")
+	USoundBase* HitSound;
+
+	UPROPERTY(EditAnywhere, Category = "Effects")
+	TSubclassOf<class UCameraShakeBase> HitCameraShakeClass;
 };
